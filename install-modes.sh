@@ -7,6 +7,13 @@ set -e
 
 echo "🚀 Installing Kilo Code Custom Modes..."
 
+# Check if this is an update
+if [ -f "$CONFIG_DIR/custom_modes.yaml" ]; then
+    echo "🔄 Updating existing modes configuration..."
+else
+    echo "📦 Installing fresh modes configuration..."
+fi
+
 # Determine OS and set config path
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     CONFIG_DIR="$HOME/.config/Code/User/globalStorage/kilocode.kilo-code/settings"
@@ -24,6 +31,26 @@ echo "📁 Config directory: $CONFIG_DIR"
 # Create directory if it doesn't exist
 mkdir -p "$CONFIG_DIR"
 
+# Backup existing configuration if it exists
+if [ -f "$CONFIG_DIR/custom_modes.yaml" ]; then
+    BACKUP_FILE="$CONFIG_DIR/custom_modes.yaml.backup.$(date +%Y%m%d_%H%M%S)"
+    cp "$CONFIG_DIR/custom_modes.yaml" "$BACKUP_FILE"
+    echo "📦 Existing configuration backed up to: $BACKUP_FILE"
+fi
+
+# Validate YAML syntax
+echo "🔍 Validating YAML syntax..."
+if command -v yamllint &> /dev/null; then
+    if yamllint custom_modes.yaml; then
+        echo "✅ YAML syntax is valid"
+    else
+        echo "❌ YAML syntax validation failed"
+        exit 1
+    fi
+else
+    echo "⚠️  yamllint not found, skipping YAML validation"
+fi
+
 # Copy the modes configuration
 if [ -f "custom_modes.yaml" ]; then
     cp custom_modes.yaml "$CONFIG_DIR/"
@@ -37,6 +64,13 @@ fi
 if [ -f "$CONFIG_DIR/custom_modes.yaml" ]; then
     MODE_COUNT=$(grep -c "slug:" "$CONFIG_DIR/custom_modes.yaml")
     echo "✅ Installation verified: $MODE_COUNT modes configured"
+
+    # Check for required fields
+    MISSING_SLUGS=$(grep -n "name:" "$CONFIG_DIR/custom_modes.yaml" | grep -v "slug:" | wc -l)
+    if [ "$MISSING_SLUGS" -gt 0 ]; then
+        echo "⚠️  Warning: $MISSING_SLUGS modes may be missing required 'slug' fields"
+    fi
+
     echo ""
     echo "📋 Installed modes:"
     grep "name:" "$CONFIG_DIR/custom_modes.yaml" | sed 's/.*name: //' | sed 's/^/- /'

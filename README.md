@@ -4,7 +4,7 @@ This guide explains how to replicate the process of turning markdown files into 
 
 ## Overview
 
-This setup creates 9 specialized kilo code modes based on design and development guidelines from markdown files. The modes are configured globally for use across all VSCode instances.
+This setup creates 10 specialized kilo code modes based on design and development guidelines from markdown files. The modes are configured globally for use across all VSCode instances.
 
 ## Prerequisites
 
@@ -71,7 +71,7 @@ Restart VSCode completely to load the new global modes.
 
 ## Available Modes
 
-After setup, you'll have access to these 9 modes:
+After setup, you'll have access to these 10 specialized modes, each with categories, tags, and usage examples:
 
 ### Specialist Modes
 - **aria-accessibility**: ARIA Accessibility Implementation Specialist
@@ -82,6 +82,7 @@ After setup, you'll have access to these 9 modes:
 
 ### Design Modes
 - **aceternity-ui-design**: Aceternity UI Design Specialist
+- **responsive-design**: Responsive Design Expert (Web, Mobile, Mobile-First)
 - **shadcn-ui-design**: Shadcn UI Design Specialist
 - **design-principles**: Design Principles Specialist
 - **typography-design**: Typography Design Specialist
@@ -94,12 +95,21 @@ Each mode is configured with:
 - **Custom Instructions**: Full content from the source markdown files
 - **When to Use**: Specific scenarios for mode selection
 
+## Recent Improvements
+
+This setup includes several enhancements for better usability:
+
+- **Mode Categories & Tags**: Each mode now has a category and relevant tags for better organization
+- **Enhanced Installation**: The install script now includes backup, validation, and better error handling
+- **Usage Examples**: Key modes include concrete example scenarios in their customInstructions
+- **Cross-Platform Support**: Improved OS detection and path handling
+
 ## Customization
 
 To modify or add modes:
 1. Edit the `custom_modes.yaml` file
 2. Follow the YAML structure with required fields: slug, name, roleDefinition, groups
-3. Optional fields: description, whenToUse, customInstructions
+3. Optional fields: description, whenToUse, customInstructions, category, tags
 4. Restart VSCode to apply changes
 
 ## Troubleshooting
