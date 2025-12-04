@@ -4,7 +4,7 @@ This guide explains how to replicate the process of turning markdown files into 
 
 ## Overview
 
-This setup creates 10 specialized kilo code modes based on design and development guidelines from markdown files. The modes are configured globally for use across all VSCode instances.
+This setup creates 11 specialized kilo code modes based on design and development guidelines from markdown files. The modes are configured globally for use across all VSCode instances.
 
 ## Prerequisites
 
@@ -71,7 +71,7 @@ Restart VSCode completely to load the new global modes.
 
 ## Available Modes
 
-After setup, you'll have access to these 10 specialized modes, each with categories, tags, and usage examples:
+After setup, you'll have access to these 11 specialized modes, each with categories, tags, and usage examples:
 
 ### Specialist Modes
 - **aria-accessibility**: ARIA Accessibility Implementation Specialist
@@ -86,6 +86,10 @@ After setup, you'll have access to these 10 specialized modes, each with categor
 - **shadcn-ui-design**: Shadcn UI Design Specialist
 - **design-principles**: Design Principles Specialist
 - **typography-design**: Typography Design Specialist
+
+### UX Modes
+- **user-persona**: UX Research Persona Creator
+- **ux-expert**: UX Research & Design Expert
 
 ## Mode Details
 
